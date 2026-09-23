@@ -5,74 +5,81 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#05070d">
-<title>Neon Pinball — V3</title>
+<meta name="theme-color" content="#05060b">
+<title>Neon Rush Pinball V4</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app">
-<header>
-  <div class="brand"><small>NEON ARCADE</small><strong>PINBALL</strong></div>
-  <div class="hud">
-    <div><span>SCORE</span><b id="score">0000000</b></div>
-    <div><span>BEST</span><b id="best">0000000</b></div>
-    <div><span>BALL</span><b id="balls">3</b></div>
-    <div><span>MULTI</span><b id="multi">x1</b></div>
-  </div>
-</header>
-
-<main>
-  <section class="cabinet">
-    <div class="backglass">
-      <span class="tiny">NEON</span><b>RUSH</b><span class="tiny">PINBALL</span>
+  <header class="topbar">
+    <div class="title"><span>NEON ARCADE</span><b>NEON RUSH</b></div>
+    <div class="scoreboard">
+      <div><small>SCORE</small><strong id="score">0000000</strong></div>
+      <div class="desktopStat"><small>BEST</small><strong id="best">0000000</strong></div>
+      <div><small>BALL</small><strong id="balls">3</strong></div>
+      <div><small>MULTI</small><strong id="multi">x1</strong></div>
     </div>
-    <div class="playfield">
-      <canvas id="game"></canvas>
+  </header>
 
-      <div class="lane-label left-label">LEFT<br>RAMP</div>
-      <div class="lane-label right-label">RIGHT<br>RAMP</div>
+  <main class="machine-wrap">
+    <section class="machine" aria-label="Mesa de pinball">
+      <div class="backbox">
+        <div class="back-lights"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="back-logo"><span>NEON</span><b>RUSH</b><em>PINBALL</em></div>
+        <div class="back-display"><small>MODE</small><b id="backMode">SHOOT THE RAMPS</b></div>
+      </div>
+      <div class="glass-frame">
+        <div class="playfield-wrap">
+          <canvas id="game" aria-label="Mesa de pinball interactiva"></canvas>
+          <div class="touch-ui">
+            <button id="flLeft" class="flipper-btn left" aria-label="Flipper izquierdo"><b>◀</b><span>FLIPPER</span></button>
+            <button id="flRight" class="flipper-btn right" aria-label="Flipper derecho"><span>FLIPPER</span><b>▶</b></button>
+            <button id="plunger" class="launch-btn" aria-label="Lanzar bola"><span>LAUNCH</span><b>HOLD</b></button>
+          </div>
+          <div id="pauseOverlay" class="pause-overlay hidden"><b>PAUSADO</b><span>Toca PAUSE para continuar</span></div>
+        </div>
+      </div>
+    </section>
 
-      <button id="flLeft" class="touch-control fl-left">◀<small>FLIPPER</small></button>
-      <button id="flRight" class="touch-control fl-right"><small>FLIPPER</small>▶</button>
-      <button id="plunger" class="plunger">LAUNCH<br><b>HOLD</b></button>
+    <aside class="side-panel">
+      <div class="mode-panel">
+        <small>OBJETIVO ACTUAL</small>
+        <b id="mode">SHOOT THE RAMPS</b>
+        <p id="modeText">Completa las dos rampas para encender el LOCK.</p>
+      </div>
+      <div class="progress-panel">
+        <small>PROGRESO</small>
+        <div class="progress"><i id="pRampL"></i><span>RAMP L</span></div>
+        <div class="progress"><i id="pRampR"></i><span>RAMP R</span></div>
+        <div class="progress"><i id="pTargets"></i><span>TARGET BANK</span></div>
+        <div class="progress"><i id="pSpinner"></i><span>SPINNER × 5</span></div>
+      </div>
+      <div class="tips">
+        <b>CONTROLES</b>
+        <span>Botones inferiores → flippers</span>
+        <span>LAUNCH → mantén pulsado</span>
+        <span>PAUSE → pausa la partida</span>
+      </div>
+      <div class="side-buttons">
+        <button id="pause">Ⅱ PAUSE</button>
+        <button id="sound">🔊 SOUND</button>
+        <button id="newGame">↻ NEW GAME</button>
+      </div>
+    </aside>
+  </main>
 
-      <div id="pauseOverlay" class="pause hidden"><b>PAUSED</b><span>Tap ▶ to continue</span></div>
+  <footer><span>IPAD EDITION</span><span>•</span><span>PHYSICAL-STYLE PINBALL · 3 BALLS · MULTIBALL</span></footer>
+
+  <div id="startOverlay" class="modal">
+    <div class="start-card">
+      <div class="start-kicker">NEON ARCADE PRESENTS</div>
+      <h1>NEON<br><strong>RUSH</strong></h1>
+      <p>Una mesa de pinball arcade para iPad, con rampas, órbitas, slingshots, bumpers, targets, scoop, multiball y jackpots.</p>
+      <div class="feature-row"><span>3 FLIPPERS</span><span>MULTIBALL</span><span>JACKPOTS</span></div>
+      <button id="start" type="button"><span>INSERT BALL</span><b>TOUCH TO PLAY</b></button>
+      <small class="start-note">Mejor en horizontal · toca el botón para comenzar</small>
     </div>
-  </section>
-
-  <aside class="info">
-    <div class="mode-card">
-      <span>ACTIVE MODE</span>
-      <b id="mode">SHOOT THE RAMPS</b>
-      <p id="modeText">Hit both ramps to light the center lock.</p>
-    </div>
-    <div class="shot-card">
-      <span>SHOTS</span>
-      <div><i id="r1"></i> LEFT RAMP</div>
-      <div><i id="r2"></i> RIGHT RAMP</div>
-      <div><i id="t1"></i> TARGET BANK</div>
-      <div><i id="sp"></i> SPINNER</div>
-    </div>
-    <button id="pause" class="utility">Ⅱ PAUSE</button>
-    <button id="sound" class="utility">🔊 SOUND</button>
-  </aside>
-</main>
-
-<footer>
-  <span>TOUCH CONTROLS</span>
-  <span>◀ / ▶ FLIPPERS · LAUNCH BUTTON</span>
-  <button id="newGame">NEW GAME</button>
-</footer>
-
-<div id="startOverlay" class="modal">
-  <div class="card">
-    <div class="logo">✦</div>
-    <small>NEON ARCADE PRESENTS</small>
-    <h1>NEON RUSH</h1>
-    <p>Un pinball diseñado para iPad con rampas, targets, spinner, multiball y misiones.</p>
-    <div class="chips"><b>3 FLIPPERS</b><b>RAMPS</b><b>MULTIBALL</b></div>
-    <button id="start" type="button" aria-label="Jugar al pinball">JUGAR</button>
   </div>
 </div>
 <script src="game.js"></script>
