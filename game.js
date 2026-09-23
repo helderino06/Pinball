@@ -44,5 +44,49 @@ function bind(btn,set){btn.addEventListener('touchstart',e=>{e.preventDefault();
 bind(flL,v=>left=v);bind(flR,v=>right=v);bind(plunger,v=>launchHold=v);
 addEventListener('keydown',e=>{if(e.key==='ArrowLeft')left=true;if(e.key==='ArrowRight')right=true;if(e.key==='ArrowUp')upper=true;if(e.code==='Space')launchHold=true;if(e.key==='p')togglePause()});addEventListener('keyup',e=>{if(e.key==='ArrowLeft')left=false;if(e.key==='ArrowRight')right=false;if(e.key==='ArrowUp')upper=false;if(e.code==='Space')launchHold=false});
 function togglePause(){if(!playing)return;paused=!paused;pauseOverlay.classList.toggle('hidden',!paused)}
-pauseBtn.onclick=togglePause;soundBtn.onclick=()=>{audioOn=!audioOn;soundBtn.textContent=audioOn?'🔊 SOUND':'🔇 MUTED'};newGameBtn.onclick=newGame;start.onclick=newGame;
+function safeTap(el,fn){
+  if(!el)return;
+  let locked=false;
+  const run=(e)=>{
+    if(e){e.preventDefault();e.stopPropagation()}
+    if(locked)return;
+    locked=true;
+    fn(e);
+    setTimeout(()=>locked=false,450);
+  };
+  // Pointer events are the primary path on modern iPadOS/Safari.
+  el.addEventListener('pointerup',run,{passive:false});
+  // Touch fallback for Safari/WebViews where pointer delivery can be interrupted.
+  el.addEventListener('touchend',run,{passive:false});
+  el.addEventListener('click',run);
+}
+
+function startGameFromUI(e){
+  if(e){e.preventDefault();e.stopPropagation()}
+  if(playing) return;
+  newGame();
+}
+
+// The whole start card is an active touch target on iPad. This makes the first
+// interaction forgiving even if the finger lands beside the button.
+let startCardLocked=false;
+function startCardTap(e){
+  if(!overlay || overlay.classList.contains('hidden')) return;
+  const target=e.target;
+  if(target && target.closest && target.closest('#start')) return;
+  if(startCardLocked)return;
+  startCardLocked=true;
+  if(e.cancelable)e.preventDefault();
+  e.stopPropagation();
+  startGameFromUI(e);
+  setTimeout(()=>startCardLocked=false,500);
+}
+
+safeTap(start,startGameFromUI);
+safeTap(pauseBtn,togglePause);
+safeTap(soundBtn,()=>{audioOn=!audioOn;soundBtn.textContent=audioOn?'🔊 SOUND':'🔇 MUTED'});
+safeTap(newGameBtn,newGame);
+overlay.addEventListener('pointerup',startCardTap,{passive:false});
+overlay.addEventListener('touchend',startCardTap,{passive:false});
+
 function loop(t){let dt=Math.min(2,(t-last)/16.67||1);last=t;if(playing&&!paused)physics(dt);draw();requestAnimationFrame(loop)}hud();requestAnimationFrame(loop);
