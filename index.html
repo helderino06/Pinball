@@ -1,87 +1,21 @@
 <!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#05060b">
-<title>Neon Rush Pinball V4</title>
-<link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div id="app">
-  <header class="topbar">
-    <div class="title"><span>NEON ARCADE</span><b>NEON RUSH</b></div>
-    <div class="scoreboard">
-      <div><small>SCORE</small><strong id="score">0000000</strong></div>
-      <div class="desktopStat"><small>BEST</small><strong id="best">0000000</strong></div>
-      <div><small>BALL</small><strong id="balls">3</strong></div>
-      <div><small>MULTI</small><strong id="multi">x1</strong></div>
-    </div>
-  </header>
-
-  <main class="machine-wrap">
-    <section class="machine" aria-label="Mesa de pinball">
-      <div class="backbox">
-        <div class="back-lights"><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="back-logo"><span>NEON</span><b>RUSH</b><em>PINBALL</em></div>
-        <div class="back-display"><small>MODE</small><b id="backMode">SHOOT THE RAMPS</b></div>
-      </div>
-      <div class="glass-frame">
-        <div class="playfield-wrap">
-          <canvas id="game" aria-label="Mesa de pinball interactiva"></canvas>
-          <div class="touch-ui">
-            <button id="flLeft" class="flipper-btn left" aria-label="Flipper izquierdo"><b>◀</b><span>FLIPPER</span></button>
-            <button id="flRight" class="flipper-btn right" aria-label="Flipper derecho"><span>FLIPPER</span><b>▶</b></button>
-            <button id="plunger" class="launch-btn" aria-label="Lanzar bola"><span>LAUNCH</span><b>HOLD</b></button>
-          </div>
-          <div id="pauseOverlay" class="pause-overlay hidden"><b>PAUSADO</b><span>Toca PAUSE para continuar</span></div>
-        </div>
-      </div>
-    </section>
-
-    <aside class="side-panel">
-      <div class="mode-panel">
-        <small>OBJETIVO ACTUAL</small>
-        <b id="mode">SHOOT THE RAMPS</b>
-        <p id="modeText">Completa las dos rampas para encender el LOCK.</p>
-      </div>
-      <div class="progress-panel">
-        <small>PROGRESO</small>
-        <div class="progress"><i id="pRampL"></i><span>RAMP L</span></div>
-        <div class="progress"><i id="pRampR"></i><span>RAMP R</span></div>
-        <div class="progress"><i id="pTargets"></i><span>TARGET BANK</span></div>
-        <div class="progress"><i id="pSpinner"></i><span>SPINNER × 5</span></div>
-      </div>
-      <div class="tips">
-        <b>CONTROLES</b>
-        <span>Botones inferiores → flippers</span>
-        <span>LAUNCH → mantén pulsado</span>
-        <span>PAUSE → pausa la partida</span>
-      </div>
-      <div class="side-buttons">
-        <button id="pause">Ⅱ PAUSE</button>
-        <button id="sound">🔊 SOUND</button>
-        <button id="newGame">↻ NEW GAME</button>
-      </div>
-    </aside>
-  </main>
-
-  <footer><span>IPAD EDITION</span><span>•</span><span>PHYSICAL-STYLE PINBALL · 3 BALLS · MULTIBALL</span></footer>
-
-  <div id="startOverlay" class="modal">
-    <div class="start-card">
-      <div class="start-kicker">NEON ARCADE PRESENTS</div>
-      <h1>NEON<br><strong>RUSH</strong></h1>
-      <p>Una mesa de pinball arcade para iPad, con rampas, órbitas, slingshots, bumpers, targets, scoop, multiball y jackpots.</p>
-      <div class="feature-row"><span>3 FLIPPERS</span><span>MULTIBALL</span><span>JACKPOTS</span></div>
-      <button id="start" type="button"><span>INSERT BALL</span><b>TOUCH TO PLAY</b></button>
-      <small class="start-note">Mejor en horizontal · toca el botón para comenzar</small>
-    </div>
-  </div>
-</div>
-<script src="game.js"></script>
-</body>
-</html>
+<html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#05070d"><title>Neon Rush Pinball V5</title><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="style.css">
+</head><body><div id="app">
+<header class="topbar"><div class="brand"><span>NEON ARCADE</span><b>PINBALL</b></div><div class="backbox-title"><span>NEON</span><strong>RUSH</strong><em>PINBALL</em></div><div class="scoreboard"><div><small>SCORE</small><strong id="score">0000000</strong></div><div><small>BEST</small><strong id="best">0000000</strong></div><div><small>BALL</small><strong id="balls">3</strong></div><div><small>MULTI</small><strong id="multi">x1</strong></div></div></header>
+<main class="layout">
+<section class="cabinet"><div class="backglass"><div class="city"></div><div class="back-logo"><small>NEON</small><b>RUSH</b><span>AFTER DARK</span></div><div class="back-mode" id="backMode">SHOOT THE RAMPS</div></div>
+<div class="playfield-shell"><canvas id="game"></canvas></div>
+<div class="cabinet-controls">
+<button id="flLeft" class="control fl-left"><span>◀</span><b>LEFT FLIPPER</b></button>
+<button id="flRight" class="control fl-right"><b>RIGHT FLIPPER</b><span>▶</span></button>
+<button id="plunger" class="control plunger"><i></i><b>LAUNCH</b><small>HOLD</small></button>
+</div></section>
+<aside class="sidebar"><div class="panel objective"><small>ACTIVE MODE</small><b id="mode">SHOOT THE RAMPS</b><p id="modeText">Completa las dos rampas para encender el LOCK.</p></div><div class="panel shots"><small>SHOTS</small><div><i id="shotL"></i> LEFT RAMP</div><div><i id="shotR"></i> RIGHT RAMP</div><div><i id="shotT"></i> TARGET BANK</div><div><i id="shotS"></i> SPINNER</div></div><button id="pause" class="sidebtn">Ⅱ PAUSE</button><button id="sound" class="sidebtn">🔊 SOUND</button><button id="newGame" class="newgame">↻ NEW GAME</button></aside>
+</main>
+<div id="startOverlay" class="modal"><div class="start-card"><small>NEON ARCADE PRESENTS</small><h1>NEON <strong>RUSH</strong></h1><p>Una mesa arcade para iPad con carril de lanzamiento, guías físicas, rampas, bumpers, targets, slingshots, scoop, multiball y jackpots.</p><div class="features"><span>PHYSICAL RAILS</span><span>3 BALLS</span><span>MULTIBALL</span></div><button id="start">JUGAR <small>TOCA PARA EMPEZAR</small></button></div></div>
+<div id="pauseOverlay" class="pause hidden"><b>PAUSA</b><span>Toca PAUSE para continuar</span></div>
+<footer>IPAD EDITION · LANDSCAPE · NEON RUSH PINBALL</footer>
+<script src="game.js"></script></div></body></html>
