@@ -5,45 +5,57 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#080b14">
-<title>Neon Pinball</title>
+<meta name="theme-color" content="#060914">
+<title>Neon Pinball — Arcade</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app">
   <header>
-    <div>
-      <div class="eyebrow">NEON ARCADE</div>
-      <h1>PINBALL</h1>
-    </div>
-    <div class="stats">
-      <div><span>PUNTOS</span><b id="score">0</b></div>
-      <div><span>MEJOR</span><b id="best">0</b></div>
-      <div><span>BOLAS</span><b id="balls">3</b></div>
+    <div class="brand"><small>NEON ARCADE</small><strong>PINBALL</strong></div>
+    <div class="hud">
+      <div><span>SCORE</span><b id="score">000000</b></div>
+      <div><span>BEST</span><b id="best">000000</b></div>
+      <div><span>BALL</span><b id="balls">3</b></div>
+      <div><span>MULTI</span><b id="multi">x1</b></div>
     </div>
   </header>
 
   <main>
-    <section class="machine">
+    <aside class="side left">
+      <div class="mission"><span>MISSION</span><b id="mission">LIGHT 3 TARGETS</b></div>
+      <div class="combo"><span>COMBO</span><b id="combo">—</b></div>
+    </aside>
+
+    <section class="cabinet">
       <canvas id="game"></canvas>
-      <div class="overlay" id="overlay">
-        <div class="panel">
-          <div class="logo">✦</div>
-          <h2>NEON PINBALL</h2>
-          <p>Desliza o toca los laterales para controlar los flippers.</p>
-          <button id="start">JUGAR</button>
-        </div>
-      </div>
-      <div class="hint" id="hint">TOCA IZQUIERDA / DERECHA</div>
+      <div id="message" class="message hidden"></div>
+      <div id="pauseOverlay" class="pause hidden"><div><b>PAUSA</b><small>Toca ▶ para continuar</small></div></div>
     </section>
+
+    <aside class="side right">
+      <button id="pause" class="round">Ⅱ</button>
+      <button id="sound" class="round">🔊</button>
+      <div class="tip">Toca y mantén<br>cada lado para<br>los flippers</div>
+    </aside>
   </main>
 
   <footer>
-    <button id="pause">Ⅱ</button>
-    <span>Mejor puntuación guardada en este iPad</span>
-    <button id="sound">🔊</button>
+    <button id="newGame">NUEVA PARTIDA</button>
+    <span>NEON PINBALL · iPAD EDITION</span>
   </footer>
+
+  <div id="startOverlay" class="modal">
+    <div class="card">
+      <div class="mark">✦</div>
+      <div class="overline">NEON ARCADE</div>
+      <h1>PINBALL</h1>
+      <p>Una mesa completa pensada para jugar con el iPad en horizontal.</p>
+      <div class="features"><span>● 3 BOLAS</span><span>● MULTIBALL</span><span>● MISIONES</span></div>
+      <button id="start">JUGAR</button>
+    </div>
+  </div>
 </div>
 <script src="game.js"></script>
 </body>
